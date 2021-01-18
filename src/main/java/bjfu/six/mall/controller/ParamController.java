@@ -141,17 +141,16 @@ public class ParamController {
                 {
                     ArrayList<ProductFamily> grandsons=new ArrayList<ProductFamily>();
                     if(p2.getParentId()==p.getId()) {
-                        ProductFamily children = new ProductFamily(p2);
                         for (Params p3 : params1) {
                             if (p3.getParentId() == p2.getId()) {
                                 ProductFamily grandson = new ProductFamily(p3);
                                 grandsons.add(grandson);
                             }
                         }
+                        ProductFamily child=new ProductFamily(p2);
+                        child.setChildren(grandsons.toArray(new ProductFamily[grandsons.size()]));
+                        childrens.add(child);
                     }
-                    ProductFamily child=new ProductFamily(p2);
-                    child.setChildren(grandsons.toArray(new ProductFamily[grandsons.size()]));
-                    childrens.add(child);
                 }
                 family.setChildren(childrens.toArray(new ProductFamily[childrens.size()]));
                 families.add(family);
