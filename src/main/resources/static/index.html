@@ -129,7 +129,7 @@
 
 			grid-row-gap: 1px;
 			grid-column-gap: 1px;
-			background: #E4E4E4;
+			/*background: #E4E4E4;*/
 			border-bottom: 1px solid #E4E4E4;
 			border-right: 1px solid #E4E4E4;
 		}
@@ -183,14 +183,6 @@
 	</div>
 	<min-width-container>
 		<div class="banner">
-<!--			<div class="banner-left">-->
-<!--				<ul class="banner-left-list  text-4">-->
-<!--					<li @click="go_search" v-for="cls of classes">-->
-<!--						<div>{{cls.name}}</div>-->
-<!--						<div><span class="el-icon-arrow-right"></span></div>-->
-<!--					</li>-->
-<!--				</ul>-->
-<!--			</div>-->
 			<div class="mall_left">
 				<h2 class="category_title">全部配件分类</h2>
 				<!--分类菜单-->
@@ -206,7 +198,7 @@
 									<div class="next_menu">
 										<template v-for="subItem in item.children">
 											<div class="next_menu_box">
-												<a @click="go_search(item.id)" class="menu01">
+												<a @click="go_search(subItem.id)" class="menu01">
 													<strong>{{subItem.name}}</strong>
 													<span v-if="subItem.children.length >0">
                                                                 &nbsp;&nbsp;&gt;&nbsp;&nbsp;
@@ -216,7 +208,7 @@
 													<template v-for="subSubItem in subItem.children"
 															  v-if="subItem.children.length >0">
 														<a class="menu02"
-														   @click="go_search(item.id)">{{subSubItem.name}}</a>
+														   @click="go_search(subSubItem.id)">{{subSubItem.name}}</a>
 													</template>
 												</div>
 											</div>
@@ -230,12 +222,21 @@
 					</ul>
 				</div>
 			</div>
-			<div class="banner-right">
-				<el-carousel :interval="5000" arrow="always">
-					<el-carousel-item v-for="item in 4" :key="item">
-						<el-image :src="'/images/banner/banner'+ (item + 1) + '.jpg'"></el-image>
-					</el-carousel-item>
-				</el-carousel>
+			<div class="slide_box ts_main" >
+				<div class="hd btn">
+					<ul>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+					</ul>
+				</div>
+				<div class="bd ts_slide">
+					<ul class="ts_slide_list">
+						<li v-for="item in 2" >
+							<img :src="'/images/banner/banner'+ item + '.jpg'">
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</min-width-container>
@@ -251,48 +252,149 @@
 		</div>
 	</min-width-container>
 	<min-width-container>
-		<div class="floor m-t-16" v-for="floor, index of floors">
-			<div class="floor-title">
-				<div class="center text-weak-4">F{{index + 1}}</div>
-				<div></div>
-				<div class="m-l-8">{{floor.name}}</div>
-				<div class="pointer text-general-1">查看更多>></div>
-			</div>
-			<div class="floor-body">
-				<div style="grid-area:a">
-					<el-image :src="'/images/f' + (index + 1)+ '_left_big.jpg'"></el-image>
-				</div> <!--310  450-->
-				<div class="floor-body-item pointer" v-if="floor.children[0]" :style="{backgroundImage: 'url(' + floor.children[0].iconUrl + ')', gridArea:'b'}" @click="go_detail(floor.children[0].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[0].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[0].price.toFixed(2)}}</div>
+		<div class="floor m-t-16" >
+			<div class="content_box" v-if="floors.length>0">
+				<!--一层-->
+				<div id="floor_one">
+					<div class="floor_nav_box">
+						<div>&nbsp;F1</div>
+						<h1 >{{floors[0].name}}</h1>
+						<a href="#">查看更多&gt;&gt;</a>
+					</div>
+					<div class="content_box">
+						<a href="javascript:void(0)" class="floor_left_banner">
+							<img src="images/products/f1_left_big.jpg" alt="">
+						</a>
+						<div class="floor_middle_box01">
+							<template v-for="(item,index) in floors[0].children" v-if="index < 2">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+						<div class="floor_right_box01">
+							<template v-for="(item,index) in floors[0].children" v-if="index >= 2">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+					</div>
 				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[1]" :style="{backgroundImage: 'url(' + floor.children[1].iconUrl + ')', gridArea:'c'}" @click="go_detail(floor.children[1].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[1].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[1].price.toFixed(2)}}</div>
+				<!--二层-->
+				<div id="floor_two">
+					<div class="floor_nav_box">
+						<div>&nbsp;F2</div>
+						<h1>{{floors[1].name}}</h1>
+						<a href="#">查看更多&gt;&gt;</a>
+					</div>
+					<div class="content_box">
+						<a href="javascript:void(0)" class="floor_left_banner">
+							<img src="images/products/f2_left_big.jpg" alt="">
+						</a>
+						<div class="floor_middle_box02">
+							<template v-for="(item,index) in floors[1].children" v-if="index < 3">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+						<div class="floor_right_box02">
+							<template v-for="(item,index) in floors[1].children" v-if="index >= 3">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+					</div>
 				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[2]" :style="{backgroundImage: 'url(' + floor.children[2].iconUrl + ')', gridArea:'d'}" @click="go_detail(floor.children[2].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[2].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[2].price.toFixed(2)}}</div>
+				<!--三层-->
+				<div id="floor_three">
+					<div class="floor_nav_box">
+						<div>&nbsp;F3</div>
+						<h1>{{floors[2].name}}</h1>
+						<a href="#">查看更多&gt;&gt;</a>
+					</div>
+					<div class="content_box">
+						<a href="javascript:void(0)" class="floor_left_banner">
+							<img src="images/products/f3_left_big.jpg" alt="">
+						</a>
+						<div class="floor_middle_box01">
+							<template v-for="(item,index) in floors[2].children" v-if="index < 2">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+						<div class="floor_right_box01">
+							<template v-for="(item,index) in floors[2].children" v-if="index >= 2">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+					</div>
 				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[3]" :style="{backgroundImage: 'url(' + floor.children[3].iconUrl + ')', gridArea:'e'}" @click="go_detail(floor.children[3].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[3].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[3].price.toFixed(2)}}</div>
-				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[4]" :style="{backgroundImage: 'url(' + floor.children[4].iconUrl + ')', gridArea:'f'}" @click="go_detail(floor.children[4].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[4].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[4].price.toFixed(2)}}</div>
-				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[5]" :style="{backgroundImage: 'url(' + floor.children[5].iconUrl + ')', gridArea:'g'}" @click="go_detail(floor.children[5].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[5].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[5].price.toFixed(2)}}</div>
-				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[6]" :style="{backgroundImage: 'url(' + floor.children[6].iconUrl + ')', gridArea:'h'}" @click="go_detail(floor.children[6].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[6].name}}</div>
-					<div class="floor-body-item-line2 text-5" style="color: #FE653A">¥{{floor.children[6].price.toFixed(2)}}</div>
-				</div>
-				<div class="floor-body-item pointer" v-if="floor.children[7]" :style="{backgroundImage: 'url(' + floor.children[7].iconUrl + ')', gridArea:'i'}" @click="go_detail(floor.children[7].id)">
-					<div class="floor-body-item-line1 text-4 text-general-1">{{floor.children[7].name}}</div>
-					<div class="floor-body- item-line2 text-5" style="color: #FE653A">¥{{floor.children[7].price.toFixed(2)}}</div>
+				<!--四层-->
+				<div id="floor_four">
+					<div class="floor_nav_box">
+						<div>&nbsp;F4</div>
+						<h1>{{floors[3].name}}</h1>
+						<a href="#">查看更多&gt;&gt;</a>
+					</div>
+					<div class="content_box">
+						<a href="javascript:void(0)" class="floor_left_banner">
+							<img src="images/products/f4_left_big.jpg" alt="">
+						</a>
+						<div class="floor_middle_box02">
+							<template v-for="(item,index) in floors[3].children" v-if="index < 3">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+						<div class="floor_right_box02">
+							<template v-for="(item,index) in floors[3].children" v-if="index >= 3">
+								<a @click="go_detail(item.id)">
+									<div class="product_info_container">
+										<div>{{item.name}}</div>
+										<div>￥{{item.price.toFixed(2)}}</div>
+									</div>
+									<img :src="item.iconUrl" alt="">
+								</a>
+							</template>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -309,7 +411,19 @@
 <script src="./components/footer-bottom.js"></script>
 <script src="./components/footer-link.js"></script>
 <script src="./components/header-full.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/jquery.SuperSlide.2.1.3.js"></script>
 <script>
+	//轮播图
+	$(function () {
+		$(".slide_box").slide({
+			titCell: ".hd ul",
+			mainCell: ".bd ul",
+			autoPage: true,
+			effect: "leftLoop",
+			autoPlay: true
+		});
+	});
 	const app = new Vue({
 		el: "#app",
 		data:{
@@ -329,7 +443,7 @@
 			},
 
 			go_search(id){
-				window.location.href = "/commodity-search.html?"+id;
+				window.location.href = "/commodity-search.html?param_id="+id;
 			}
 		},
 		created(){
@@ -359,6 +473,7 @@
 			//获取楼层商品
 			axios.post("/product/findfloors.do").then(response=>{
 				if(response.data.status === 0){
+					console.log(response.data)
 					this.floors = response.data.data;
 				}else{
 					console.log(response.data.msg);

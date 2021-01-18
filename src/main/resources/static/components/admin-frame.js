@@ -3,7 +3,7 @@ Vue.component('admin-frame', {
 		<div class="admin-frame">
 			<div class="admin-frame-header">
 				<div class="admin-frame-header-left text-2 text-weak-4  center">
-					学者科技商城管理平台
+					艾氪森配件商城管理平台
 				</div>
 				<div class="admin-frame-header-right text-2 text-weak-4 ">
 					<span class=" m-l-12 pointer" :class="is_menu_opened ? 'el-icon-s-fold': 'el-icon-s-unfold' " @click="is_menu_opened = !is_menu_opened"></span>

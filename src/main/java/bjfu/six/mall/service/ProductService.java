@@ -40,7 +40,7 @@ public class ProductService {
     public int saveProducts(String name,Integer class_id,String icon_url,String sub_images,String detail,String spec_param,Integer price,Integer stock){
         Products products=new Products();
         products.setName(name);
-        products.setClassId(class_id);
+        products.setProductId(class_id);
         products.setIconUrl(icon_url);
         products.setSubImages(sub_images);
         products.setDetail(detail);

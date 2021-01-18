@@ -4,7 +4,7 @@ Vue.component('header-full', {
 			<min-width-container class="header-full-bar">
 				<div class="header-full-bar-content">
 					<div class="text-general-1 text-4">
-					    <span style="padding-left:40px">欢迎访问SIX科技配件商城</span><span class="m-l-20 m-r-16">[访问官网]</span>
+					    <span style="padding-left:40px">欢迎访问艾氪森配件商城</span><span class="m-l-20 m-r-16"><a href="../index.html">[访问官网]</a></span>
                         <span class="text-important-very" v-if="user.id === undefined || user.role === 1">
                             <a class="text-important-very" href="./login.html">登录</a>
                             <span> | </span>
@@ -18,6 +18,7 @@ Vue.component('header-full', {
 					</div>
 					<div class="text-general-1 text-4"><span @click="go_order" class="pointer">我的商城</span> <span class="el-icon-shopping-cart-full text-3 m-l-20"></span><span class="m-r-20 pointer" @click="go_cart">购物车[{{cart_num}}]</span> 我的关注</div>
 				</div>
+				
 			</min-width-container>
 			<min-width-container>
 				<div class="header-full-content">

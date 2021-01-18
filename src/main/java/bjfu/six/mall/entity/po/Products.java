@@ -8,7 +8,7 @@ import java.util.Date;
 public class Products {
     private Integer id;
     private String name;
-    private int classId;
+    private int productId;
     private String iconUrl;
     private String subImages;
     private String detail;
@@ -38,12 +38,12 @@ public class Products {
         this.name = name;
     }
 
-    public int getClassId() {
-        return classId;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getIconUrl() {

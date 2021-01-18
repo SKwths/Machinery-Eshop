@@ -238,15 +238,15 @@
 /*banner*/
 .ts_main {
     float: right;
-    height: 420px;
+    height: 400px;
     overflow: hidden;
     width: 1000px;
     position: relative;
-    margin-top: -365px;
+    /*margin-top: -320px;*/
 }
 
 .ts_slide {
-    margin-left: 100px;
+    /*margin-left: 80px;*/
 }
 
 .ts_slide,
