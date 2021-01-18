@@ -4,6 +4,7 @@ import bjfu.six.mall.common.Response;
 import bjfu.six.mall.entity.po.*;
 import bjfu.six.mall.entity.vo.OrderItem;
 import bjfu.six.mall.entity.vo.OrderList;
+import bjfu.six.mall.entity.vo.ProductFamily;
 import bjfu.six.mall.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 @Controller
 public class OrderController {
@@ -77,10 +79,10 @@ public class OrderController {
             ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
             for (int i = 0; i < items.length; i++) {
                 OrderItem orderItem = new OrderItem();
-                Products products = productService.getDetail(items[i].getProductId());
+                Products products = productService.getDetail(items[i].getGoodsId());
 
                 orderItem.setOrderId(items[i].getOrderId());
-                orderItem.setCommodityId(items[i].getProductId());
+                orderItem.setCommodityId(items[i].getGoodsId());
                 orderItem.setIconUrl(products.getIconUrl());
                 orderItem.setCommodityName(products.getName());
                 orderItem.setQuantity(items[i].getQuantity());
@@ -154,10 +156,10 @@ public class OrderController {
                     ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
                     for (int j = 0; j < items.length; j++) {
                         OrderItem orderItem = new OrderItem();
-                        Products products = productService.getDetail(items[j].getProductId());
+                        Products products = productService.getDetail(items[j].getGoodsId());
 
                         orderItem.setOrderId(items[j].getOrderId());
-                        orderItem.setCommodityId(items[j].getProductId());
+                        orderItem.setCommodityId(items[j].getGoodsId());
                         orderItem.setIconUrl(products.getIconUrl());
                         orderItem.setCommodityName(products.getName());
                         orderItem.setQuantity(items[j].getQuantity());
@@ -242,8 +244,17 @@ public class OrderController {
             int orderId = order.getId();
             for (int i = 0; i < carts.length; i++) {
                 Item item = new Item();
+                Random r=new Random();
+                int r1=r.nextInt(1000);
+                item.setId(r1);
+                item.setUid(user.getId());
+                Products products = productService.getDetail(carts[i].getProductId());
+                item.setGoodsName(products.getName());
+                item.setIconUrl(products.getIconUrl());
+                item.setPrice(products.getPrice());
+                item.setTotalPrice(products.getPrice()*carts[i].getQuantity());
                 item.setOrderId(orderId);
-                item.setProductId(carts[i].getProductId());
+                item.setGoodsId(carts[i].getProductId());
                 item.setQuantity(carts[i].getQuantity());
                 itemService.addItems(item);
             }
@@ -253,9 +264,9 @@ public class OrderController {
             ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
             for (int i = 0; i < items.length; i++) {
                 OrderItem orderItem = new OrderItem();
-                Products products = productService.getDetail(items[i].getProductId());
+                Products products = productService.getDetail(items[i].getGoodsId());
                 orderItem.setOrderId(items[i].getOrderId());
-                orderItem.setCommodityId(items[i].getProductId());
+                orderItem.setCommodityId(items[i].getGoodsId());
                 orderItem.setIconUrl(products.getIconUrl());
                 orderItem.setCommodityName(products.getName());
                 orderItem.setQuantity(items[i].getQuantity());
@@ -334,8 +345,16 @@ public class OrderController {
             orderService.addOrder(order);
             int orderId = order.getId();
             Item item = new Item();
+            Random r=new Random();
+            int r1=r.nextInt(1000);
+            item.setId(r1);
+            item.setUid(user.getId());
+            item.setGoodsName(products.getName());
+            item.setIconUrl(products.getIconUrl());
+            item.setPrice(products.getPrice());
+            item.setTotalPrice(totalPrice);
             item.setOrderId(orderId);
-            item.setProductId(Integer.parseInt(productId));
+            item.setGoodsId(Integer.parseInt(productId));
             item.setQuantity(quantity);
             itemService.addItems(item);
 
@@ -346,10 +365,10 @@ public class OrderController {
             ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
             for (int i = 0; i < items.length; i++) {
                 OrderItem orderItem = new OrderItem();
-                Products pro = productService.getDetail(items[i].getProductId());
+                Products pro = productService.getDetail(items[i].getGoodsId());
 
                 orderItem.setOrderId(items[i].getOrderId());
-                orderItem.setCommodityId(items[i].getProductId());
+                orderItem.setCommodityId(items[i].getGoodsId());
                 orderItem.setIconUrl(pro.getIconUrl());
                 orderItem.setCommodityName(pro.getName());
                 orderItem.setQuantity(items[i].getQuantity());
@@ -421,10 +440,10 @@ public class OrderController {
                     ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
                     for (int j = 0; j < items.length; j++) {
                         OrderItem orderItem = new OrderItem();
-                        Products products = productService.getDetail(items[j].getProductId());
+                        Products products = productService.getDetail(items[j].getGoodsId());
 
                         orderItem.setOrderId(items[j].getOrderId());
-                        orderItem.setCommodityId(items[j].getProductId());
+                        orderItem.setCommodityId(items[j].getGoodsId());
                         orderItem.setIconUrl(products.getIconUrl());
                         orderItem.setCommodityName(products.getName());
                         orderItem.setQuantity(items[j].getQuantity());
@@ -492,10 +511,10 @@ public class OrderController {
                     ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
                     for (int i = 0; i < items.length; i++) {
                         OrderItem orderItem = new OrderItem();
-                        Products products = productService.getDetail(items[i].getProductId());
+                        Products products = productService.getDetail(items[i].getGoodsId());
 
                         orderItem.setOrderId(items[i].getOrderId());
-                        orderItem.setCommodityId(items[i].getProductId());
+                        orderItem.setCommodityId(items[i].getGoodsId());
                         orderItem.setIconUrl(products.getIconUrl());
                         orderItem.setCommodityName(products.getName());
                         orderItem.setQuantity(items[i].getQuantity());
@@ -561,10 +580,10 @@ public class OrderController {
             ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
             for (int i = 0; i < items.length; i++) {
                 OrderItem orderItem = new OrderItem();
-                Products products = productService.getDetail(items[i].getProductId());
+                Products products = productService.getDetail(items[i].getGoodsId());
 
                 orderItem.setOrderId(items[i].getOrderId());
-                orderItem.setCommodityId(items[i].getProductId());
+                orderItem.setCommodityId(items[i].getGoodsId());
                 orderItem.setIconUrl(products.getIconUrl());
                 orderItem.setCommodityName(products.getName());
                 orderItem.setQuantity(items[i].getQuantity());

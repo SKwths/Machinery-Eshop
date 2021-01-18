@@ -4,7 +4,7 @@ Vue.component('header-full', {
 			<min-width-container class="header-full-bar">
 				<div class="header-full-bar-content">
 					<div class="text-general-1 text-4">
-					    <span style="padding-left:40px">欢迎访问学者科技配件商城</span><span class="m-l-20 m-r-16">[访问官网]</span>
+					    <span style="padding-left:40px">欢迎访问SIX科技配件商城</span><span class="m-l-20 m-r-16">[访问官网]</span>
                         <span class="text-important-very" v-if="user.id === undefined || user.role === 1">
                             <a class="text-important-very" href="./login.html">登录</a>
                             <span> | </span>

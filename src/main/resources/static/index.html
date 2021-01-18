@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>首页 | 机械配件商城</title>
+	<link rel="stylesheet" type="text/css" href="./css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="./element-ui/index.css">
 	<link rel="stylesheet" type="text/css" href="./css/common.css" />
+	<link rel="stylesheet" type="text/css" href="./css/index.css" />
 	<link rel="stylesheet" type="text/css" href="./components/min-width-container.css"/>
 	<link rel="stylesheet" type="text/css" href="./components/footer-bottom.css"/>
 	<link rel="stylesheet" type="text/css" href="./components/footer-image.css" />
@@ -172,23 +174,61 @@
 		<min-width-container>
 			<div class="nav-list">
 				<ul class="text-general-1">
-					<li class="active">配件商城</li>
-					<li>金融服务</li>
-					<li>销售/服务网络</li>
-					<li>积分商城</li>
+					<li v-for="(item,index) in tabs"  @click="switchTab(index)"  :class="current == index?'active':''">
+						{{item}}
+					</li>
 				</ul>
 			</div>
 		</min-width-container>
 	</div>
 	<min-width-container>
 		<div class="banner">
-			<div class="banner-left">
-				<ul class="banner-left-list  text-4">
-					<li @click="go_search" v-for="cls of classes">
-						<div>{{cls.name}}</div>
-						<div><span class="el-icon-arrow-right"></span></div>
-					</li>
-				</ul>
+<!--			<div class="banner-left">-->
+<!--				<ul class="banner-left-list  text-4">-->
+<!--					<li @click="go_search" v-for="cls of classes">-->
+<!--						<div>{{cls.name}}</div>-->
+<!--						<div><span class="el-icon-arrow-right"></span></div>-->
+<!--					</li>-->
+<!--				</ul>-->
+<!--			</div>-->
+			<div class="mall_left">
+				<h2 class="category_title">全部配件分类</h2>
+				<!--分类菜单-->
+				<div class="menu">
+					<ul>
+						<li class="item" v-for="(item,index) in categories" :key="index">
+							<h3 class="item_hd">
+								<a @click="go_search(item.id)">{{item.name}}</a>
+								<span class="left_nav_arrow" v-if="item.children.length >0"></span>
+							</h3>
+							<div class="sub_category" v-if="item.children.length >0">
+								<div class="sub_view">
+									<div class="next_menu">
+										<template v-for="subItem in item.children">
+											<div class="next_menu_box">
+												<a @click="go_search(item.id)" class="menu01">
+													<strong>{{subItem.name}}</strong>
+													<span v-if="subItem.children.length >0">
+                                                                &nbsp;&nbsp;&gt;&nbsp;&nbsp;
+                                                            </span>
+												</a>
+												<div class="menu02_box">
+													<template v-for="subSubItem in subItem.children"
+															  v-if="subItem.children.length >0">
+														<a class="menu02"
+														   @click="go_search(item.id)">{{subSubItem.name}}</a>
+													</template>
+												</div>
+											</div>
+											<div class="menu_greyline" v-if="subItem.children.length >0"></div>
+										</template>
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+				</div>
 			</div>
 			<div class="banner-right">
 				<el-carousel :interval="5000" arrow="always">
@@ -201,7 +241,7 @@
 	</min-width-container>
 	<min-width-container>
 		<div class="hot m-t-20">
-			<div class="hot-title"><span style="font-weight: 1000; color: #FE653A;">HOT</span> 热销系列产品</div>
+			<div class="hot-title"><span style="font-weight:bold; color: #FE653A;">HOT</span> 热销系列产品</div>
 			<div class="hot-body ">
 				<div class="hot-body-item pointer" v-for="item of hot_commodities" :style="{backgroundImage: 'url(' +item.iconUrl  + ')'} "  @click="go_detail(item.id)">
 					<div class="hot-body-item-line1 text-3 text-general-1">{{item.name}}</div>
@@ -272,20 +312,24 @@
 <script>
 	const app = new Vue({
 		el: "#app",
-		data(){
-			return {
-				hot_commodities : [],
-				classes: [],
-				floors: []
-			};
+		data:{
+			hot_commodities : [],
+			categories: [],
+			floors: [],
+			current:0,
+			tabs:["配件商城","金融服务","销售/服务网络","积分商城"]
 		},
 		methods: {
+			//点击切换选项
+			switchTab(index) {
+				this.current = index
+			},
 			go_detail(id){
 				window.location.href = "/commodity-detail.html?" + id;
 			},
 
-			go_search(){
-				window.location.href = "/commodity-search.html";
+			go_search(id){
+				window.location.href = "/commodity-search.html?"+id;
 			}
 		},
 		created(){
@@ -304,8 +348,8 @@
 			/*获取类型列表*/
 			axios.post("/param/findallparams.do").then(response=>{
 				if(response.data.status === 0){
-					this.classes = response.data.data;
-					console.log(this.classes);
+					this.categories = response.data.data;
+					console.log(this.categories);
 				}else{
 					console.log(response.data.msg);
 				}

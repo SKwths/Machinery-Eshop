@@ -148,7 +148,7 @@ public class ProductController {
         }
         if (id != null) {
             if (productService.updateCommodity(id, name, class_id, icon_url, sub_images, detail, spec_param, price, stock) != 0) {
-                return Response.success("产品新更新成功！");
+                return Response.success("产品更新成功！");
             } else {
                 return Response.error(1, "产品更新失败");
             }

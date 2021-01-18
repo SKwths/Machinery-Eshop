@@ -154,12 +154,6 @@ public class ParamController {
                 }
                 family.setChildren(childrens.toArray(new ProductFamily[childrens.size()]));
                 families.add(family);
-                /**ParamAndProduct cam = new ParamAndProduct();
-                cam.setParam_id(p.getId());
-                cam.setName(p.getName());
-                Products[] products = productService.getByParamID(p.getId(), 0, Integer.MAX_VALUE);
-                cam.setChildren(products);
-                cams.add(cam);**/
             }
             Response rs=new Response();
             rs.setData(families);
