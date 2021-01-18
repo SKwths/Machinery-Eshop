@@ -135,16 +135,35 @@ public class ParamController {
                 family.setId(p.getId());
                 family.setParentId(p.getParentId());
                 family.setName(p.getName());
-                //ProductFamily[] childrens=
-                ParamAndProduct cam = new ParamAndProduct();
+                Params[] params1=paramService.getAllParams();
+                ArrayList<ProductFamily> childrens=new ArrayList<ProductFamily>();
+                for(Params p2 : params1)
+                {
+                    ArrayList<ProductFamily> grandsons=new ArrayList<ProductFamily>();
+                    if(p2.getParentId()==p.getId()) {
+                        ProductFamily children = new ProductFamily(p2);
+                        for (Params p3 : params1) {
+                            if (p3.getParentId() == p2.getId()) {
+                                ProductFamily grandson = new ProductFamily(p3);
+                                grandsons.add(grandson);
+                            }
+                        }
+                    }
+                    ProductFamily child=new ProductFamily(p2);
+                    child.setChildren(grandsons.toArray(new ProductFamily[grandsons.size()]));
+                    childrens.add(child);
+                }
+                family.setChildren(childrens.toArray(new ProductFamily[childrens.size()]));
+                families.add(family);
+                /**ParamAndProduct cam = new ParamAndProduct();
                 cam.setParam_id(p.getId());
                 cam.setName(p.getName());
                 Products[] products = productService.getByParamID(p.getId(), 0, Integer.MAX_VALUE);
                 cam.setChildren(products);
-                cams.add(cam);
+                cams.add(cam);**/
             }
             Response rs=new Response();
-            rs.setData(cams);
+            rs.setData(families);
             rs.setMsg("返回分类和商品成功");
             return rs;
         }catch (RuntimeException e){

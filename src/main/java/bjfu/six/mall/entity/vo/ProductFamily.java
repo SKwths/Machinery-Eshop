@@ -1,10 +1,23 @@
 package bjfu.six.mall.entity.vo;
 
+import bjfu.six.mall.entity.po.Params;
+import bjfu.six.mall.entity.po.Products;
+
 public class ProductFamily {
     private int id;
     private int parentId;
     private String name;
     private ProductFamily[] children;
+
+    public ProductFamily(){
+
+    }
+
+    public ProductFamily(Params params){
+        this.id=params.getId();
+        this.parentId=params.getParentId();
+        this.name=params.getName();
+    }
 
     public int getId() {
         return id;
