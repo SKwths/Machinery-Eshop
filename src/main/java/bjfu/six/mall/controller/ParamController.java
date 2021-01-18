@@ -5,6 +5,7 @@ import bjfu.six.mall.entity.po.Params;
 import bjfu.six.mall.entity.po.Products;
 import bjfu.six.mall.entity.po.User;
 import bjfu.six.mall.entity.vo.ParamAndProduct;
+import bjfu.six.mall.entity.vo.ProductFamily;
 import bjfu.six.mall.service.ParamService;
 import bjfu.six.mall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,9 +127,15 @@ public class ParamController {
     @ResponseBody
     public Response getAllClassAndCommodity(){
         try {
+            ArrayList<ProductFamily> families=new ArrayList<ProductFamily>();
             ArrayList<ParamAndProduct> cams = new ArrayList<ParamAndProduct>();
             Params[] params=paramService.getAllParams2();
             for(Params p : params){
+                ProductFamily family=new ProductFamily();
+                family.setId(p.getId());
+                family.setParentId(p.getParentId());
+                family.setName(p.getName());
+                //ProductFamily[] childrens=
                 ParamAndProduct cam = new ParamAndProduct();
                 cam.setParam_id(p.getId());
                 cam.setName(p.getName());

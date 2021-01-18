@@ -53,8 +53,8 @@ public class CartService {
         lists[0]=new Lists();
         lists[0].setId(cart.getId());
         lists[0].setUserId(userId);
-            commodity= productsMapper.selectProductsById(cart.getProduct_id());
-        lists[0].setProductId(cart.getProduct_id());
+            commodity= productsMapper.selectProductsById(cart.getProductId());
+        lists[0].setProductId(cart.getProductId());
         lists[0].setName(commodity.getName());
         lists[0].setQuantity(cart.getQuantity());
         lists[0].setPrice(commodity.getPrice());
@@ -100,8 +100,8 @@ public class CartService {
             lists[i]=new Lists();
             lists[i].setId(cart[i].getId());
             lists[i].setUserId(userId);
-            commodity= productsMapper.selectProductsById(cart[i].getProduct_id());
-            lists[i].setProductId(cart[i].getProduct_id());
+            commodity= productsMapper.selectProductsById(cart[i].getProductId());
+            lists[i].setProductId(cart[i].getProductId());
             lists[i].setName(commodity.getName());
             lists[i].setQuantity(cart[i].getQuantity());
             lists[i].setPrice(commodity.getPrice());
@@ -135,8 +135,8 @@ public class CartService {
             lists[i]=new Lists();
             lists[i].setId(cart[i].getId());
             lists[i].setUserId(userId);
-            Products commodity= productsMapper.selectProductsById(cart[i].getProduct_id());
-            lists[i].setProductId(cart[i].getProduct_id());
+            Products commodity= productsMapper.selectProductsById(cart[i].getProductId());
+            lists[i].setProductId(cart[i].getProductId());
             lists[i].setName(commodity.getName());
             lists[i].setQuantity(cart[i].getQuantity());
             lists[i].setPrice(commodity.getPrice());
@@ -169,7 +169,7 @@ public class CartService {
         else {
             Cart cart = new Cart();
             cart.setUserId(userId);
-            cart.setProduct_id(productId);
+            cart.setProductId(productId);
             cart.setQuantity(count);
             cartsMapper.insertCart(cart);
         }

@@ -226,7 +226,7 @@ public class OrderController {
             if (carts.length == 0) return Response.error(1, "购物车为空，请选择要购买的商品！");
             double totalPrice = 0;
             for (int i = 0; i < carts.length; i++) {
-                Products products = productService.getDetail(carts[i].getProduct_id());
+                Products products = productService.getDetail(carts[i].getProductId());
                 if (products == null) return Response.error(1, "购物车中某商品已经下架，不能在线购买！");
                 totalPrice = totalPrice + (products.getPrice() * carts[i].getQuantity());
             }
@@ -243,7 +243,7 @@ public class OrderController {
             for (int i = 0; i < carts.length; i++) {
                 Item item = new Item();
                 item.setOrderId(orderId);
-                item.setProductId(carts[i].getProduct_id());
+                item.setProductId(carts[i].getProductId());
                 item.setQuantity(carts[i].getQuantity());
                 itemService.addItems(item);
             }

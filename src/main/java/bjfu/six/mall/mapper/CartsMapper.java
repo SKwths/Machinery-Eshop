@@ -28,6 +28,6 @@ public interface CartsMapper {
     void deleteCommodity(int userId,int productId);
 
     @Insert("insert into action_carts(user_id, product_id, quantity) " +
-            "values(#{userId}, #{product_id}, #{quantity}) ")
+            "values(#{userId}, #{productId}, #{quantity}) ")
     int insertCart(Cart cart);
 }

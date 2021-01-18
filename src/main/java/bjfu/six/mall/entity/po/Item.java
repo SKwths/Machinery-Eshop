@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Item {
     private int id;
+    private int uid;
     private int orderId;
     private int productId;
     private int quantity;
@@ -41,4 +42,12 @@ public class Item {
     public Date getUpdateTime() { return updateTime; }
 
     public void setUpdateTime(Date updateTime) { this.updateTime = updateTime; }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 }

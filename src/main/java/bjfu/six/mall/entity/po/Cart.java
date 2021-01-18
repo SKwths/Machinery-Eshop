@@ -7,7 +7,7 @@ import java.util.Date;
 public class Cart {
     private int id;
     private int userId;
-    private int product_id;
+    private int productId;
     private int quantity;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
@@ -30,12 +30,12 @@ public class Cart {
         this.userId = userId;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {
