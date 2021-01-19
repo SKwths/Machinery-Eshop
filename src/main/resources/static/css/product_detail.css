@@ -109,7 +109,7 @@
 
 .product_delivery {
     padding-left: 10px;
-    padding-top: 5xp;
+    padding-top: 5px;
     line-height: 30px;
     margin-bottom: 10px;
 }
@@ -154,19 +154,19 @@
 }
 
 .product_minus_1 {
-    background: url(/images/common/product_minus_2.jpg) no-repeat;
+    background: url(../images/common/product_minus_2.jpg) no-repeat;
 }
 
 .product_minus_2 {
-    background: url(/images/common/product_minus_2.jpg) no-repeat;
+    background: url(../images/common/product_minus_2.jpg) no-repeat;
 }
 
 .product_plus_1 {
-    background: url(/images/common/product_plus_1.jpg) no-repeat;
+    background: url(../images/common/product_plus_1.jpg) no-repeat;
 }
 
 .product_plus_2 {
-    background: url(/images/common/product_plus_1.jpg) no-repeat;
+    background: url(../images/common/product_plus_1.jpg) no-repeat;
 }
 
 .product_select>div:nth-of-type(2) {
@@ -262,7 +262,7 @@
 }
 
 .recommended_package>div>div:nth-child(2) {
-    background: url(/images/common/plus.jpg) no-repeat;
+    background: url(../images/common/plus.jpg) no-repeat;
     height: 23px;
     width: 23px;
     margin-top: 60px;
@@ -359,7 +359,7 @@
     overflow: hidden;
     height: 40px;
     width: 928px;
-    background: url(/images/common/productTabBar_bg.png) no-repeat;
+    background: url(../images/common/productTabBar_bg.png) no-repeat;
 }
 
 .product_tab_bar li{
@@ -437,4 +437,8 @@
     padding-top: 15px;
     min-height: 200px;
     padding-left: 10px;
+}
+
+.productnav{
+    margin: 10px 0;
 }

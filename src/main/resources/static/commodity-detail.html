@@ -1,548 +1,556 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>商品详情 | 机械配件商城</title>
-		<link rel="stylesheet" type="text/css" href="./element-ui/index.css">
-		<link rel="stylesheet" type="text/css" href="./css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="./css/common.css" />
-		<link rel="stylesheet" type="text/css" href="./css/product_detail.css" />
-		<link rel="stylesheet" type="text/css" href="./components/min-width-container.css"/>
-		<link rel="stylesheet" type="text/css" href="./components/footer-bottom.css"/>
-		<link rel="stylesheet" type="text/css" href="./components/footer-image.css" />
-		<link rel="stylesheet" type="text/css" href="./components/footer-link.css" />
-		<link rel="stylesheet" type="text/css" href="./components/header-full.css" />
-		<style>
-			.content-commodity{
-				display: flex;
-			}
-			
-			.content-commodity-wapper{
-				flex-grow: 1;
-			}
-			
-			.content-commodity-wapper-flex{
-				display: flex;
-			}
-			
-			.content-commodity-left-image{
-				width: 378px;
-				height: 378px;
-				border: 1px solid #E9E9E9;
-				background-repeat: no-repeat;
-				background-size: 100% 100%;
-			}
-			
-			.content-commodity-right{
-				flex-grow: 1;
-			}
-			
-			.content-commodity-left-subimages{
-				display: flex;
-				height: 58px;
-			}
-			
-			.content-commodity-left-subimages-images{
-				flex-grow: 1;
-				position: relative;
-			}
-			
-			.content-commodity-left-subimages-last, .content-commodity-left-subimages-next{
-				width: 29px;
-				background: #E1DFE0;
-				line-height: 58px;
-				text-align: center;
-			}
-			
-			.content-commodity-left-subimages-images-container{
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				overflow-x: scroll;
-				overflow-y: hidden;
-				white-space: nowrap;
-			}
-			
-			.content-commodity-left-subimages-images-container::-webkit-scrollbar{
-			   display:none;
-			}
-			
-			.content-commodity-left-subimages-images-container > div{
-				display: inline-block;
-				width: 58px;
-				height: 58px;
-				border: 1px solid #E1DFE0;
-				margin-left: 8px;
-				background-repeat: no-repeat;
-				background-size: 100% 100%;
-			}
-			
-			.content-commodity-left-subimages-images-container > div:last-child{
-				margin-right: 8px;
-			}
-			
-			.content-commodity-recommend{
-				width: 172px;
-				flex-shrink: 0;
-			}
-			
-			.content-commodity-recommend-item .el-image{
-				width: 103px;
-				height: 103px;
-			}
-			
-			.content-commodity-right{
-				padding: 0 32px;
-				border-right: 1px solid #EBEBEB;
-			}
-			
-			.content-commodity-right-selected{
-				width: 93px;
-				height: 33px;
-				line-height: 31px;
-				display: inline-block;
-				border: 1px solid #41B6E7;
-				background-position: bottom right;
-				background-repeat: no-repeat;
-				background-image: url(images/selected.png);
-			}
-			
-			.content-commodity-right-price{
-				height: 77px;
-				background: #EEEEEE;
-				padding: 8px;
-			}
-			
-			.content-commodity-right-num .el-input-number__decrease, .content-commodity-right-num .el-input-number__increase{
-				height: 26px;
-				line-height: 26px;
-			} 
-			
-			.content-commodity-right-buy > div{
-				width: 140px;
-				height: 40px;
-				line-height: 40px;
-				display: inline-block;
-				vertical-align: middle;
-			}
-			
-			.content-commodity-right-buy > div:first-child{
-				border: 1px solid #F99652;
-				background: #FDEAD1;
-				color: #E58948;
-			}
-			
-			.content-commodity-right-buy > div:last-child{
-				background: #F27300;
-				color: white;
-			}
-			
-			.content-commodity-right-ask{
-				display: flex;
-				align-items: center;
-			}
-			
-		</style>
-	</head>
-	<body>
-		<div id="app">
-			<header-full :bordered="true"></header-full>
-			<div class="content_box pr">
-				<div class="productnav">
-					<span><a href="index.html">首页</a></span>
-					<span>&nbsp;&gt;&nbsp;</span>
-					<span><a href="">混凝土机械</a></span>
-					<span>&nbsp;&gt;&nbsp;</span>
-					<span><a href="">油品</a></span>
-					<span>&nbsp;&gt;&nbsp;</span>
-					<span><a href="">液压油</a></span>
-				</div>
-				<!--商品详情-->
-				<div class="product_detail">
-					<!--左侧-->
-					<div>
-						<!--商品图片-->
-						<div class="product_picture_list l">
-							<div>
-								<img :src="commodity.iconUrl" alt="">
-							</div>
-							<div>
-								<span style="margin-right: 10px;"><img src="/images/common/left_arrow.jpg" alt=""></span>
-								<div class="product_picture_table_main l">
-									<ul v-if="commodity.subImages">
-										<template v-for="item in commodity.subImages.split(',')">
-											<li>
-												<div><img :src="item" alt=""></div>
-											</li>
-										</template>
-									</ul>
-								</div>
-								<span><img src="/images/common/right_arrow.jpg" alt=""></span>
-							</div>
-						</div>
-						<!--商品信息-->
-						<div class="product_info_list l">
-							<!--商品标题-->
-							<div>
-								<h3 class="l" :title="commodity.name">
-									{{commodity.name}}
-								</h3>
-								<div class="product_attention l ">
-									<a href="javascript:void(0);" id="store_btn">
-										<span>关注</span>
-									</a>
-								</div>
-							</div>
-							<!--商品价格-->
-							<div class="product_price_info">
-								<span>现价：</span>
-								<template v-if="commodity.price">
-									<span>￥{{commodity.price.toFixed(2)}}</span>
-								</template>
-								<div>
-									<span>促销：</span>
-									<a href="">促销9折，5桶起，包邮送回家。</a>
-								</div>
-							</div>
-							<!--商品配送-->
-							<div class="product_delivery">
-								<div>
-									<span>发货地：</span>
-									<span>北京市</span>
-									<span style="margin-left: 10px;">配送方式：</span>
-									<span>
-                                <input type="radio" name=""  checked>&nbsp;到付&nbsp;&nbsp;
-                                <input type="radio" name="" >&nbsp;在线支付
-                            </span>
-								</div>
-								<div>
-									<span>配送至：</span>
-									<select name="" >
-										<option value="">山东省</option>
-									</select>
-									<select name="" >
-										<option value="">烟台市</option>
-									</select>
-									<select name="" >
-										<option value="">请选择</option>
-									</select>
-								</div>
-							</div>
-							<!--商品购买-->
-							<div class="product_select">
-								<div>
-									<span class="l">数量：</span>
-									<div class="l">
-										<a href="" class="product_minus_1 l"></a>
-										<input type="text" name="" value="1" class="l">
-										<a href="" class="product_plus_1 l"></a>
-									</div>
-									<p class="l" style="height: 22px;">（起售数量1桶）</p>
-								</div>
-								<div>
-									<p class="l">购买方式：</p>
-									<div>
-										<a href="">全额支付<i></i></a>
-										<img src="/images/common/selected.png" alt="">
-									</div>
-								</div>
-							</div>
-							<!--立即购买+加入购物车-->
-							<div class="product_buy">
-								<div>
-									<a @click="go_buy" id="buy">立即购买</a>
-								</div>
-								<div style="margin-left:10px;">
-									<a @click="add_to_cart" id="addCart">加入购物车</a>
-								</div>
-							</div>
-							<!--服务承诺-->
-							<div class="pledges">
-								<div class="l">
-									服务承诺：
-								</div>
-								<div class="l">
-									<div class="l">
-										<img src="/images/common/pledges_01.jpg" alt="">
-									</div>
-									<div class="l">
-										<img src="/images/common/pledges_02.jpg" alt="">
-									</div>
-									<div class="l">
-										<img src="/images/common/pledges_03.jpg" alt="">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--推荐套装，未从后端请求-->
-				<div class="recommended_package l">
-					<h3>推荐套装</h3>
-					<div class="l">
-						<div class="l">
-							<img src="/images/details/tj_left.jpg" alt="">
-							<div>
-								<span>中联重科液压油</span>
-							</div>
-						</div>
-						<div class="l">
-							<!-- <span></span> -->
-						</div>
-						<div class="l">
-							<img src="/images/details/tj_left_02.jpg" alt="">
-							<div>
-								<span>发动机专用机油</span>
-							</div>
-							<div>
-								<input type="checkbox" name="" id="" checked>
-								<label>￥328.00</label>
-							</div>
-						</div>
-					</div>
-					<div class="recommended_package_price r">
-						<div class="recommended_package_price_info">
-							<span class="recommended_package_price_text">共计：</span>
-							<span class="recommended_package_price_num">
-                        <span class="total_price">
-                            ￥3156.00
-                        </span>
-                    </span>
-						</div>
-						<a href="javascript:void(0);">
-							<div class="recommended_package_buy">
-								<div class="recommended_package_buy_btn">
-									立即购买
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="recommended_package_equal_sign r"></div>
-				</div>
-				<!--侧边相关配件,未从后端请求-->
-				<div class="product_related_box">
-					<div><span>相关配件</span></div>
-					<div>
-						<div>
-							<div>
-								<a href="" title="中联重科液压油18">
-									<img src="/images/details/rel_left_01.jpg" alt="">
-								</a>
-							</div>
-							<div>
-								<div>
-									<a href="" title="中联重科液压油18">中联重科液压油18</a>
-								</div>
-								<div class="product_related_price">
-									<span>￥279.00</span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div>
-								<a href="" title="锂基脂ZL-2">
-									<img src="/images/details/rel_left_02.jpg" alt="">
-								</a>
-							</div>
-							<div>
-								<div>
-									<a href="" title="锂基脂ZL-2">锂基脂ZL-2</a>
-								</div>
-								<div class="product_related_price">
-									<span>￥256.00</span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div>
-								<a href="" title="发动机专用机油">
-									<img src="/images/details/rel_left_03.jpg" alt="">
-								</a>
-							</div>
-							<div>
-								<div>
-									<a href="" title="发动机专用机油">发动机专用机油</a>
-								</div>
-								<div class="product_related_price">
-									<span>￥328.00</span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div>
-								<a href="" title="国风底盘 专用尿素">
-									<img src="/images/details/rel_left_04.jpg" alt="">
-								</a>
-							</div>
-							<div>
-								<div>
-									<a href="" title="国风底盘 专用尿素">国风底盘 专用尿素</a>
-								</div>
-								<div class="product_related_price">
-									<span>￥42.00</span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div>
-								<a href="" title="锂基脂 008">
-									<img src="/images/details/rel_left_05.jpg" alt="">
-								</a>
-							</div>
-							<div>
-								<div>
-									<a href="" title="锂基脂 008">锂基脂 008</a>
-								</div>
-								<div class="product_related_price">
-									<span>￥215.00</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div>
-						<img src="/images/common/arrow_up.jpg" alt="">
-						<img src="/images/common/arrow_down.jpg" alt="">
-					</div>
-				</div>
-				<!--产品详情评价-->
-				<div class="product_tab_bar_box l">
-					<ul class="product_tab_bar">
-						<li v-for="(item,index) in tabs" :class="current == index ? 'product_tab_selected':''"
-							@click="switchTab(index)">
-							{{item}}
-							<span class="product_tab_num" v-if="index == 2"></span>
-						</li>
-					</ul>
-					<ul class="product_tab_contents">
-						<li class="product_tab_content" v-if="current == 0">
-							<div class="product_details_tab">
-								<div class="product_details_tab_top">
-									<span class="product_details_tab_title">{{commodity.name}}</span>
-									<img src="/images/common/productDetailsTabTop_line.png" alt=""
-										 class="product_details_tab_top_line">
-								</div>
-							</div>
-							<div class="product_details_tab_content">
-								<div class="introduction">
-									<div v-html="commodity.detail">
-									</div>
-								</div>
-							</div>
-						</li>
-						<li v-if="current == 1">
-							<div class="product_tab_content">
-								<div v-html="commodity.specParam"></div>
-							</div>
-						</li>
-						<li v-if="current == 2">
-							<div class="product_tab_content">
-								sadfdfa
-							</div>
-						</li>
-						<li v-if="current == 3">
-							<div class="product_tab_content">
-								sadfdfa
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<footer-image></footer-image>
-			<footer-link></footer-link>
-			<footer-bottom></footer-bottom>
-		</div>
-		<script src="./js/vue.js"></script>
-		<script src="./js/axios.min.js"></script>
-		<script src="./element-ui/index.js"></script>
-		<script src="./components/min-width-container.js"></script>
-		<script src="./components/footer-image.js"></script>
-		<script src="./components/footer-bottom.js"></script>
-		<script src="./components/footer-link.js"></script>
-		<script src="./components/header-full.js"></script>
-		<script>
-		    const app = new Vue({
-		        el: "#app",
-		        data(){
-					return {
-						id: '',
-						activeName: 'first',
-						radio: '2',
-						num: 1,
-						commodity: {},
-						current: 0,
-						tabs: ["产品详情", "规格参数", "累计评价", "案例"]
-					};
-		        },
-		        methods: {
-					//点击切换选项
-					switchTab(index) {
-						this.current = index
-					},
-		            go_buy(){
-		            	if(this.id){
-							//保存商品信息到sessionStorage
-							const simulated_cart = {
-								lists: [{
-										productId: this.commodity.id,
-										name: this.commodity.name,
-										price: this.commodity.price,
-										quantity: this.num,
-										totalPrice: this.num * this.commodity.price,
-								}],
-								totalPrice: this.commodity.price * this.num,
-								is_simulated_cart: true
-							}
-							sessionStorage.setItem("cart", JSON.stringify(simulated_cart));
-							//跳转到提交订单页面
-							window.location.href = "/submit-order.html";
-		            	}
-					},
-					add_to_cart(){
-						if(this.id){
-							const params = new URLSearchParams();
-							params.append("productId", this.id);
-							params.append("count", this.num);
-							axios.post("/cart/savecart.do", params).then(response=>{
-								if(response.data.status === 0){
-									this.$message({
-										message: "添加到购物车成功",
-										type: "success"
-									});
-								}else{
-									this.$message.error(response.data.msg);
-								}
-							}).catch(err=>{
-								this.$message.error("添加失败");
-							});
-						}
-					}
-		        },
-		        created(){
-		        	const query = window.location.search;
-		        	const id = query.substring(1, query.length);
-					if(/^\d+$/.test(id)){
-						this.id = id;
-						const params = new URLSearchParams();
-						params.append('productId', id);
-						axios.post("/product/getdetail.do", params).then(response=>{
-							if(response.data.status === 0){
-								this.commodity = response.data.data;
+<head>
+    <meta charset="utf-8">
+    <title>商品详情 | 机械配件商城</title>
+    <link rel="stylesheet" type="text/css" href="./element-ui/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+    <link rel="stylesheet" type="text/css" href="./css/product_detail.css" />
+    <link rel="stylesheet" type="text/css" href="./components/min-width-container.css"/>
+    <link rel="stylesheet" type="text/css" href="./components/footer-bottom.css"/>
+    <link rel="stylesheet" type="text/css" href="./components/footer-image.css" />
+    <link rel="stylesheet" type="text/css" href="./components/footer-link.css" />
+    <link rel="stylesheet" type="text/css" href="./components/header-full.css" />
+    <script src="./js/v-distpicker.js"></script>
+    <style>
+        .content-commodity{
+            display: flex;
+        }
 
-							}else{
-								this.$message.error(response.data.msg);
-							}
-						}).catch(err=>{
-							this.$message.error("连接服务器异常");
-						});
-					}else{
-						this.$message.error("参数错误");
-					}
+        .content-commodity-wapper{
+            flex-grow: 1;
+        }
 
-		        }
-		    });
-			
-		</script>
-	</body>
+        .content-commodity-wapper-flex{
+            display: flex;
+        }
+
+        .content-commodity-left-image{
+            width: 378px;
+            height: 378px;
+            border: 1px solid #E9E9E9;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .content-commodity-right{
+            flex-grow: 1;
+        }
+
+        .content-commodity-left-subimages{
+            display: flex;
+            height: 58px;
+        }
+
+        .content-commodity-left-subimages-images{
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .content-commodity-left-subimages-last, .content-commodity-left-subimages-next{
+            width: 29px;
+            background: #E1DFE0;
+            line-height: 58px;
+            text-align: center;
+        }
+
+        .content-commodity-left-subimages-images-container{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
+        .content-commodity-left-subimages-images-container::-webkit-scrollbar{
+            display:none;
+        }
+
+        .content-commodity-left-subimages-images-container > div{
+            display: inline-block;
+            width: 58px;
+            height: 58px;
+            border: 1px solid #E1DFE0;
+            margin-left: 8px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .content-commodity-left-subimages-images-container > div:last-child{
+            margin-right: 8px;
+        }
+
+        .content-commodity-recommend{
+            width: 172px;
+            flex-shrink: 0;
+        }
+
+        .content-commodity-recommend-item .el-image{
+            width: 103px;
+            height: 103px;
+        }
+
+        .content-commodity-right{
+            padding: 0 32px;
+            border-right: 1px solid #EBEBEB;
+        }
+
+        .content-commodity-right-selected{
+            width: 93px;
+            height: 33px;
+            line-height: 31px;
+            display: inline-block;
+            border: 1px solid #41B6E7;
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            background-image: url(images/selected.png);
+        }
+
+        .content-commodity-right-price{
+            height: 77px;
+            background: #EEEEEE;
+            padding: 8px;
+        }
+
+        .content-commodity-right-num .el-input-number__decrease, .content-commodity-right-num .el-input-number__increase{
+            height: 26px;
+            line-height: 26px;
+        }
+
+        .content-commodity-right-buy > div{
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .content-commodity-right-buy > div:first-child{
+            border: 1px solid #F99652;
+            background: #FDEAD1;
+            color: #E58948;
+        }
+
+        .content-commodity-right-buy > div:last-child{
+            background: #F27300;
+            color: white;
+        }
+
+        .content-commodity-right-ask{
+            display: flex;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <header-full :bordered="true"></header-full>
+    <min-width-container>
+        <div class="content">
+            <div class="m-t-12 m-b-12">
+                <el-breadcrumb separator-class="el-icon-arrow-right">
+                    <el-breadcrumb-item ><a href="index.html">首页</a></el-breadcrumb-item>
+                    <el-breadcrumb-item>产品</el-breadcrumb-item>
+                </el-breadcrumb>
+            </div>
+            <div class="content_box pr">
+                <!--					<div class="content-commodity m-b-20">-->
+
+                <!--					</div>-->
+                <!--商品详情-->
+                <div class="product_detail">
+                    <!--左侧-->
+                    <div>
+                        <!--商品图片-->
+                        <div class="product_picture_list l">
+                            <div>
+                                <img :src="commodity.iconUrl" alt="">
+                            </div>
+                            <div>
+                                <span style="margin-right: 10px;"><img src="/images/common/left_arrow.jpg" alt=""></span>
+                                <div class="product_picture_table_main l">
+                                    <ul v-if="commodity.subImages">
+                                        <template v-for="item in subImageUrls">
+                                            <li>
+                                                <div><img :src="item" alt=""></div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                                <span><img src="/images/common/right_arrow.jpg" alt=""></span>
+                            </div>
+                        </div>
+                        <!--商品信息-->
+                        <div class="product_info_list l">
+                            <!--商品标题-->
+                            <div>
+                                <h3 class="l" :title="commodity.name">
+                                    {{commodity.name}}
+                                </h3>
+<!--                                <div class="product_attention l ">-->
+<!--                                    <a href="javascript:void(0);" id="store_btn">-->
+<!--                                        <span>关注</span>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+                            </div>
+                            <!--商品价格-->
+                            <div class="product_price_info">
+                                <span>现价：</span>
+                                <template v-if="commodity.price">
+                                    <span>￥{{commodity.price.toFixed(2)}}</span>
+                                </template>
+                                <div>
+                                    <span>促销：</span>
+                                    <a href="">促销9折，5桶起，包邮送回家。</a>
+                                </div>
+                            </div>
+                            <!--商品配送-->
+                            <div class="product_delivery">
+                                <div>
+                                    <span>发货地：</span>
+                                    <span>北京市</span>
+                                    <span style="margin-left: 10px;">配送方式：</span>
+                                    <span>
+                                        <el-radio v-model="radio" label="1" >到付</el-radio>
+										<el-radio v-model="radio" label="2">在线支付</el-radio>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>配送至：</span>
+                                    <v-distpicker province="广东省" city="广州市" area="海珠区" @selected="onSelected"></v-distpicker>
+                                </div>
+                            </div>
+                            <!--商品购买-->
+                            <div class="product_select">
+                                <div class="content-commodity-right-num">数量: <el-input-number v-model="num" size="mini"
+                                                                                              :min="1" :max="10" label="选择一个数量"></el-input-number>
+                                </div>
+                                <div class="content-commodity-right-method m-t-16">购买方式：<div
+                                        class="content-commodity-right-selected text-general-1 text-4 center">全额支付</div>
+                                </div>
+                            </div>
+                            <!--立即购买+加入购物车-->
+                            <div class="product_buy">
+                                <div>
+                                    <a @click="go_buy" id="buy">立即购买</a>
+                                </div>
+                                <div style="margin-left:10px;">
+                                    <a @click="add_to_cart" id="addCart">加入购物车</a>
+                                </div>
+                            </div>
+                            <!--服务承诺-->
+                            <div class="pledges">
+                                <div class="l">
+                                    服务承诺：
+                                </div>
+                                <div class="l">
+                                    <div class="l">
+                                        <img src="/images/common/pledges_01.jpg" alt="">
+                                    </div>
+                                    <div class="l">
+                                        <img src="/images/common/pledges_02.jpg" alt="">
+                                    </div>
+                                    <div class="l">
+                                        <img src="/images/common/pledges_03.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                推荐套装-->
+                					<div class="recommended_package l">
+                						<h3>推荐套装</h3>
+                						<div class="l">
+                							<div class="l">
+                								<img src="/images/details/tj_left.jpg" alt="">
+                								<div>
+                									<span>中联重科液压油</span>
+                								</div>
+                							</div>
+                							<div class="l">
+                								<!-- <span></span> -->
+                							</div>
+                							<div class="l">
+                								<img src="/images/details/tj_left_02.jpg" alt="">
+                								<div>
+                									<span>发动机专用机油</span>
+                								</div>
+                								<div>
+                									<input type="checkbox" name="" id="" checked>
+                									<label>￥328.00</label>
+                								</div>
+                							</div>
+                						</div>
+                						<div class="recommended_package_price r">
+                							<div class="recommended_package_price_info">
+                								<span class="recommended_package_price_text">共计：</span>
+                								<span class="recommended_package_price_num">
+                                        <span class="total_price">
+                                            ￥3156.00
+                                        </span>
+                                    </span>
+                							</div>
+                							<a href="javascript:void(0);">
+                								<div class="recommended_package_buy">
+                									<div class="recommended_package_buy_btn">
+                										立即购买
+                									</div>
+                								</div>
+                							</a>
+                						</div>
+                						<div class="recommended_package_equal_sign r"></div>
+                					</div>
+                <!--侧边相关配件,未从后端请求-->
+                <div class="product_related_box">
+                    <div><span>相关配件</span></div>
+                    <div>
+                        <div>
+                            <div>
+                                <a href="" title="中联重科液压油18">
+                                    <img src="/images/details/rel_left_01.jpg" alt="">
+                                </a>
+                            </div>
+                            <div>
+                                <div>
+                                    <a href="" title="中联重科液压油18">中联重科液压油18</a>
+                                </div>
+                                <div class="product_related_price">
+                                    <span>￥279.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <a href="" title="锂基脂ZL-2">
+                                    <img src="/images/details/rel_left_02.jpg" alt="">
+                                </a>
+                            </div>
+                            <div>
+                                <div>
+                                    <a href="" title="锂基脂ZL-2">锂基脂ZL-2</a>
+                                </div>
+                                <div class="product_related_price">
+                                    <span>￥256.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <a href="" title="发动机专用机油">
+                                    <img src="/images/details/rel_left_03.jpg" alt="">
+                                </a>
+                            </div>
+                            <div>
+                                <div>
+                                    <a href="" title="发动机专用机油">发动机专用机油</a>
+                                </div>
+                                <div class="product_related_price">
+                                    <span>￥328.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <a href="" title="国风底盘 专用尿素">
+                                    <img src="/images/details/rel_left_04.jpg" alt="">
+                                </a>
+                            </div>
+                            <div>
+                                <div>
+                                    <a href="" title="国风底盘 专用尿素">国风底盘 专用尿素</a>
+                                </div>
+                                <div class="product_related_price">
+                                    <span>￥42.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <a href="" title="锂基脂 008">
+                                    <img src="/images/details/rel_left_05.jpg" alt="">
+                                </a>
+                            </div>
+                            <div>
+                                <div>
+                                    <a href="" title="锂基脂 008">锂基脂 008</a>
+                                </div>
+                                <div class="product_related_price">
+                                    <span>￥215.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="/images/common/arrow_up.jpg" alt="">
+                        <img src="/images/common/arrow_down.jpg" alt="">
+                    </div>
+                </div>
+                <!--产品详情评价-->
+                <div class="product_tab_bar_box l">
+                    <ul class="product_tab_bar">
+                        <li v-for="(item,index) in tabs" :class="current == index ? 'product_tab_selected':''"
+                            @click="switchTab(index)">
+                            {{item}}
+                            <span class="product_tab_num" v-if="index == 2"></span>
+                        </li>
+                    </ul>
+                    <ul class="product_tab_contents">
+                        <li class="product_tab_content" v-if="current == 0">
+                            <div class="product_details_tab">
+                                <div class="product_details_tab_top">
+                                    <span class="product_details_tab_title">{{commodity.name}}</span>
+                                    <img src="/images/common/productDetailsTabTop_line.png" alt=""
+                                         class="product_details_tab_top_line">
+                                </div>
+                            </div>
+                            <div class="product_details_tab_content">
+                                <div class="introduction">
+                                    <div v-html="commodity.detail">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li v-if="current == 1">
+                            <div class="product_tab_content">
+                                <div v-html="commodity.specParam"></div>
+                            </div>
+                        </li>
+                        <li v-if="current == 2">
+                            <div class="product_tab_content">
+                                sadfdfa
+                            </div>
+                        </li>
+                        <li v-if="current == 3">
+                            <div class="product_tab_content">
+                                sadfdfa
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </min-width-container>
+    <footer-image></footer-image>
+    <footer-link></footer-link>
+    <footer-bottom></footer-bottom>
+</div>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./element-ui/index.js"></script>
+<script src="./components/min-width-container.js"></script>
+<script src="./components/footer-image.js"></script>
+<script src="./components/footer-bottom.js"></script>
+<script src="./components/footer-link.js"></script>
+<script src="./components/header-full.js"></script>
+<script>
+
+    const app = new Vue({
+        el: "#app",
+        data(){
+            return {
+                address:{
+                    province:"",
+                    city:"",
+                    county:""
+                },
+                id: '',
+                activeName: 'first',
+                radio: '2',
+                num: 1,
+                commodity: {},
+                current: 0,
+                tabs: ["产品详情", "规格参数", "累计评价", "案例"],
+                subImageUrls: []
+            };
+        },
+        components: {
+            VDistpicker
+        },
+        methods: {
+            onSelected(data) {
+                this.address.province = data.province.value
+                this.address.city = data.city.value
+                this.address.county = data.area.value
+                console.log(this.address)
+            },
+            //点击切换选项
+            switchTab(index) {
+                this.current = index
+            },
+            go_buy(){
+                if(this.id){
+                    //保存商品信息到sessionStorage
+                    const simulated_cart = {
+                        lists: [{
+                            productId: this.commodity.id,
+                            name: this.commodity.name,
+                            price: this.commodity.price,
+                            quantity: this.num,
+                            totalPrice: this.num * this.commodity.price,
+                        }],
+                        totalPrice: this.commodity.price * this.num,
+                        is_simulated_cart: true
+                    }
+                    sessionStorage.setItem("cart", JSON.stringify(simulated_cart));
+                    //跳转到提交订单页面
+                    window.location.href = "/submit-order.html";
+                }
+            },
+            add_to_cart(){
+                if(this.id){
+                    const params = new URLSearchParams();
+                    params.append("productId", this.id);
+                    params.append("count", this.num);
+                    axios.post("/cart/savecart.do", params).then(response=>{
+                        if(response.data.status === 0){
+                            this.$message({
+                                message: "添加到购物车成功",
+                                type: "success"
+                            });
+                        }else{
+                            this.$message.error(response.data.msg);
+                        }
+                    }).catch(err=>{
+                        this.$message.error("添加失败");
+                    });
+                }
+            }
+        },
+        created(){
+            const query = window.location.search;
+            const id = query.substring(1, query.length);
+            if(/^\d+$/.test(id)){
+                this.id = id;
+                const params = new URLSearchParams();
+                params.append('productId', id);
+                console.log(id)
+                axios.post("/product/getdetail.do", params).then(response=>{
+                    if(response.data.status === 0){
+                        this.commodity = response.data.data;
+                        if(this.commodity.subImages!=null)
+                        {
+                            this.subImageUrls = this.commodity.subImages.split(";");
+                        }
+                    }else{
+                        this.$message.error(response.data.msg);
+                    }
+                }).catch(err=>{
+                    console.log(err)
+                    this.$message.error("连接服务器异常");
+                });
+            }else{
+                this.$message.error("参数错误");
+            }
+
+        }
+    });
+
+</script>
+</body>
 </html>

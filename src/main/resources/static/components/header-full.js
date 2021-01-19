@@ -16,7 +16,12 @@ Vue.component('header-full', {
                             <span class="text-important-very pointer" @click="logout">登出</span>
                         </span>
 					</div>
-					<div class="text-general-1 text-4"><span @click="go_order" class="pointer">我的商城</span> <span class="el-icon-shopping-cart-full text-3 m-l-20"></span><span class="m-r-20 pointer" @click="go_cart">购物车[{{cart_num}}]</span> 我的关注</div>
+					<div class="text-general-1 text-4">
+					<span @click="go_order" class="pointer">我的商城</span> 
+					<span class="el-icon-shopping-cart-full text-3 m-l-20"></span>
+					<span class="m-r-20 pointer" @click="go_cart">购物车[{{cart_num}}]</span> 
+<!--					我的关注-->
+					</div>
 				</div>
 				
 			</min-width-container>

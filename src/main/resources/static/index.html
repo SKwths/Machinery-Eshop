@@ -452,7 +452,7 @@
 			axios.post("/product/findhotproducts.do", params).then(response=>{
 				if(response.data.status === 0){
 					this.hot_commodities = response.data.data;
-					//console.log(this.hot_commodities);
+					console.log(this.hot_commodities);
 				}else{
 					console.log(response.data.msg);
 				}

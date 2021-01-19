@@ -446,6 +446,9 @@
     width:390px;
     height: 150px;
     margin-left: 6px;
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+    /*float: right;*/
 }
 
 .floor_middle_box01 a:nth-of-type(2) {
