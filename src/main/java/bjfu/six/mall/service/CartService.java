@@ -20,11 +20,6 @@ public class CartService {
     @Autowired
     private ProductsMapper productsMapper;
 
-    /**
-     * 获取购物车中商品数量
-     * @param userId      用户的ID
-     * @return quantity   该用户购物车中商品数量
-     */
     public int getquantity(int userId){
         ArrayList<Integer> quantity=cartsMapper.selectQuantityByuserId(userId);
         int totalquantity=0;
@@ -34,13 +29,6 @@ public class CartService {
         return totalquantity;
     }
 
-    /**
-     * 更新购物车中某商品数量
-     * @param userId      用户的ID
-     * @param productId   商品的ID
-     * @param count       商品数量
-     * @return CartList  购物车
-     */
     public CartList updateCommodity(int userId, int productId, int count){
         //更新商品的数量
         cartsMapper.updateCommodityQuantity(userId,productId,count);
@@ -71,63 +59,40 @@ public class CartService {
 
     }
 
-    /**
-     * 清空购物车
-     * @param userId      用户的ID
-     */
     public void clearCart(int userId){
         cartsMapper.clearCart(userId);
     }
 
-    /**
-     * 购物车删除商品
-     * @param userId      用户的ID
-     * @param productId   商品ID
-     */
-    public CartList delCommodity(int userId,int productId){
-        //在数据库中删除
-        cartsMapper.deleteCommodity(userId,productId);
-        //返回List
+    public CartList delCommodity(int userId,int productId) {
+        cartsMapper.deleteCommodity(userId, productId);
         Cart[] cart;
-        cart=cartsMapper.selectCartByUserId(userId);
+        cart = cartsMapper.selectCartByUserId(userId);
         Products commodity;
-
-        Lists[] lists=new Lists[cart.length];
-        double totalPrice=0;
-
-        for (int i = 0; i <cart.length ; i++) {
-            lists[i]=new Lists();
+        Lists[] lists = new Lists[cart.length];
+        double totalPrice = 0;
+        for (int i = 0; i < cart.length; i++) {
+            lists[i] = new Lists();
             lists[i].setId(cart[i].getId());
             lists[i].setUserId(userId);
-            commodity= productsMapper.selectProductsById(cart[i].getProductId());
+            commodity = productsMapper.selectProductsById(cart[i].getProductId());
             lists[i].setProductId(cart[i].getProductId());
             lists[i].setName(commodity.getName());
             lists[i].setQuantity(cart[i].getQuantity());
             lists[i].setPrice(commodity.getPrice());
             lists[i].setStatus(commodity.getStatus());
-            lists[i].setTotalPrice(commodity.getPrice()*cart[i].getQuantity());
+            lists[i].setTotalPrice(commodity.getPrice() * cart[i].getQuantity());
             lists[i].setStock(commodity.getStock());
             lists[i].setIconUrl(commodity.getIconUrl());
-            totalPrice+=lists[i].getTotalPrice();
+            totalPrice += lists[i].getTotalPrice();
         }
-
-
-
-        CartList cartList=new CartList();
+        CartList cartList = new CartList();
         cartList.setLists(lists);
         cartList.setTotalPrice(totalPrice);
         return cartList;
-
     }
 
-    /**
-     * 购物车商品列表
-     * @param userId      用户的ID
-     * @return cartList   购物车列表
-     */
     public CartList findAllCart(int userId){
         Cart[] cart=cartsMapper.selectCartByUserId(userId);
-
         Lists[] lists=new Lists[cart.length];
         double totalPrice=0;
         for (int i = 0; i <cart.length ; i++) {
@@ -143,7 +108,6 @@ public class CartService {
             lists[i].setTotalPrice(commodity.getPrice()*cart[i].getQuantity());
             lists[i].setStock(commodity.getStock());
             lists[i].setIconUrl(commodity.getIconUrl());
-
             totalPrice+=lists[i].getTotalPrice();
         }
 
@@ -153,12 +117,6 @@ public class CartService {
         return cartList;
     }
 
-    /**
-     * 新增购物车商品
-     * @param userId      用户的ID
-     * @param productId   商品ID
-     * @param count       数量
-     */
     public void addCommodity(int userId,int productId,int count){
         Cart cartInSystem = cartsMapper.selectCartByuserIdAndproductId(userId, productId);
         if(cartInSystem != null){

@@ -143,7 +143,7 @@ public class ProductController {
     @ResponseBody
     public Response saveProduct(HttpSession session, Integer id, String name, Integer class_id, String icon_url, String sub_images, String detail, String spec_param, Integer price, Integer stock) {
         User mgr = (User) session.getAttribute("user");
-        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {  //1-管理员账号
+        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {
             return Response.error(1, "不是管理员");
         }
         if (id != null) {
@@ -199,7 +199,7 @@ public class ProductController {
     @ResponseBody
     public Response getMgrDetail(HttpSession session, Integer productId) {
         User mgr = (User) session.getAttribute("user");
-        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {  //1-管理员账号
+        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {
             return Response.error(1, "不是管理员");
         }
         try {
@@ -218,7 +218,7 @@ public class ProductController {
     @ResponseBody
     public Response getProductList(String id, HttpSession session) {
         User mgr = (User) session.getAttribute("user");
-        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {  //1-管理员账号
+        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {
             return Response.error(1, "不是管理员");
         }
         if (id.equals("")) {
@@ -245,7 +245,7 @@ public class ProductController {
     @ResponseBody
     public Response setStatusMgr(String productId, String status, String hot, HttpSession session) {
         User mgr = (User) session.getAttribute("user");
-        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {  //1-管理员账号
+        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {
             return Response.error(1, "不是管理员");
         }
         int productid, statusid, ishot;

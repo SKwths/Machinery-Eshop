@@ -28,7 +28,6 @@ public class UserController {
         if(user != null){
             user.setPassword("");
             user.setAsw("");
-            //设置session并返回用户的信息
             session.setAttribute("user", user);
             return Response.success(user);
         }
@@ -183,7 +182,7 @@ public class UserController {
                                int age,String phone,String email,int sex,HttpSession session){
         try{
             User mgr = (User) session.getAttribute("user");
-            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {  //1-管理员账号
+            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {
                 return Response.error(1, "不是管理员,无法登录");
             }
             User user=userService.updateUser(id,name,account,age,phone,email,sex);
@@ -198,7 +197,7 @@ public class UserController {
     public Response findUser(int id,HttpSession session){
         try{
             User mgr = (User) session.getAttribute("user");
-            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {  //1-管理员账号
+            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {
                 return Response.error(1, "不是管理员,无法登录");
             }
             FindUser findUser=userService.findUser(id);
@@ -213,7 +212,7 @@ public class UserController {
     public Response deleteUsers(int id,HttpSession session){
         try{
             User mgr = (User) session.getAttribute("user");
-            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {  //1-管理员账号
+            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {
                 return Response.error(1, "不是管理员,无法登录");
             }
             if(userService.deleteUsersUser(id)==0){
@@ -231,7 +230,7 @@ public class UserController {
     public Response findUserList(HttpSession session){
         try{
             User mgr = (User) session.getAttribute("user");
-            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {  //1-管理员账号
+            if(mgr==null||(mgr!=null&&mgr.getRole() != 1)) {
                 return Response.error(1, "不是管理员,无法登录");
             }
             List<FindUser> userList=userService.findUserList();
@@ -246,7 +245,7 @@ public class UserController {
     public Response login(String account, String password){
         User user = userService.loginMgr(account, password);
 
-            if(user!=null&&user.getRole() != 1){  //1-管理员账号
+            if(user!=null&&user.getRole() != 1){
                 return Response.error(1,"不是管理员,无法登录");
             }else if(user==null){
                 return Response.error(1, "密码错误");

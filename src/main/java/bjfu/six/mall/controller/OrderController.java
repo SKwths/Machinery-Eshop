@@ -52,7 +52,7 @@ public class OrderController {
     public Response deliverReceipt(String orderNo, HttpSession session) {
 
         User mgr = (User) session.getAttribute("user");
-        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {  //1-管理员账号
+        if (mgr == null || (mgr != null && mgr.getRole() != 1)) {
             return Response.error(1, "不是管理员");
         }
         if (orderService.deliverReceipt(orderNo) == 1) {
@@ -114,7 +114,6 @@ public class OrderController {
             } else {
                 orderList.setTypeDesc("货到付款");
             }
-            //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
             if (order.getStatus() == 0) {
                 orderList.setStatusDesc("未付款");
             } else if (order.getStatus() == 1) {
@@ -189,7 +188,6 @@ public class OrderController {
                     } else {
                         orderList.setTypeDesc("货到付款");
                     }
-                    //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
                     if (order.getStatus() == 0) {
                         orderList.setStatusDesc("未付款");
                     } else if (order.getStatus() == 1) {
@@ -298,7 +296,6 @@ public class OrderController {
             } else {
                 orderList.setTypeDesc("货到付款");
             }
-            //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
             if (order.getStatus() == 0) {
                 orderList.setStatusDesc("未付款");
             } else if (order.getStatus() == 1) {
@@ -358,15 +355,12 @@ public class OrderController {
             item.setQuantity(quantity);
             itemService.addItems(item);
 
-
-            //getdetail
             int order_id = order.getId();
             Item[] items = itemService.getItemsByOrderId(order_id);
             ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
             for (int i = 0; i < items.length; i++) {
                 OrderItem orderItem = new OrderItem();
                 Products pro = productService.getDetail(items[i].getGoodsId());
-
                 orderItem.setOrderId(items[i].getOrderId());
                 orderItem.setCommodityId(items[i].getGoodsId());
                 orderItem.setIconUrl(pro.getIconUrl());
@@ -376,7 +370,6 @@ public class OrderController {
                 orderItem.setTotalPrice(items[i].getQuantity() * pro.getPrice());
                 orderItems.add(orderItem);
             }
-
 
             Address addr = addrService.findAddressById(order.getAddrId());
             OrderList orderList = new OrderList();
@@ -400,7 +393,6 @@ public class OrderController {
             } else {
                 orderList.setTypeDesc("货到付款");
             }
-            //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
             if (order.getStatus() == 0) {
                 orderList.setStatusDesc("未付款");
             } else if (order.getStatus() == 1) {
@@ -473,7 +465,6 @@ public class OrderController {
                     } else {
                         orderList.setTypeDesc("货到付款");
                     }
-                    //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
                     if (order.getStatus() == 0) {
                         orderList.setStatusDesc("未付款");
                     } else if (order.getStatus() == 1) {
@@ -546,7 +537,6 @@ public class OrderController {
                     } else {
                         orderList.setTypeDesc("货到付款");
                     }
-                    //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
                     if (order.getStatus() == 0) {
                         orderList.setStatusDesc("未付款");
                     } else if (order.getStatus() == 1) {
@@ -592,7 +582,6 @@ public class OrderController {
                 orderItems.add(orderItem);
             }
 
-
             Address addr = addrService.findAddressById(order.getAddrId());
             OrderList orderList = new OrderList();
             orderList.setOrderItems(orderItems);
@@ -615,7 +604,6 @@ public class OrderController {
             } else {
                 orderList.setTypeDesc("货到付款");
             }
-            //            1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭 6-取消
             if (order.getStatus() == 0) {
                 orderList.setStatusDesc("未付款");
             } else if (order.getStatus() == 1) {

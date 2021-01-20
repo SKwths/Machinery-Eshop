@@ -13,11 +13,6 @@ public class ParamService {
     @Autowired
     private ParamsMapper paramsMapper;
 
-    /**
-     * 添加一个商品类别
-     * @param parentId  父级别的id，为0时表示没有父类别
-     * @param name      要添加的商品类别名称
-     */
     public void addParam(int parentId, String name) throws RuntimeException{
         if(name == null || name.equals("")) {
             throw new RuntimeException("不合法的类型名字");
