@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ParamsMapper {
-    @Insert("insert into action_params(parent_id, name) values(#{parentId}, #{name})")
+    @Insert("insert into action_params(id,parent_id, name) values(#{id},#{parentId}, #{name})")
     int insertParams(Params params);
 
     @Select("select * from action_params where id = #{id}")

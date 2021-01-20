@@ -5,6 +5,8 @@ import bjfu.six.mall.mapper.ParamsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
 public class ParamService {
 
@@ -21,6 +23,8 @@ public class ParamService {
             throw new RuntimeException("不合法的类型名字");
         }
         Params params = new Params();
+        int r=10060+(int)(Math.random()*(10100-10060+1));
+        params.setId(r);
         params.setParentId(0);
         params.setName(name);
         Params parent = paramsMapper.selectParamsById(parentId);

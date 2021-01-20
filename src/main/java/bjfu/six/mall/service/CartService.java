@@ -76,7 +76,6 @@ public class CartService {
      * @param userId      用户的ID
      */
     public void clearCart(int userId){
-        //清空该用户的购物车
         cartsMapper.clearCart(userId);
     }
 
