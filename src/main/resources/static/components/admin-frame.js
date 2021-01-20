@@ -27,7 +27,7 @@ Vue.component('admin-frame', {
 					  active-text-color = "#FFFFFF"
 					  class="el-menu-vertical-demo">
 					    <el-menu-item index="1" @click="window.location.href='./commodity.html'">商品管理</el-menu-item>
-					    <el-menu-item index="2" @click="window.location.href='./type.html'">类型管理</el-menu-item>
+					    <el-menu-item index="2" @click="window.location.href='./type.html'">类别管理</el-menu-item>
 					    <el-menu-item index="3" @click="window.location.href='./order.html'">订单管理</el-menu-item>
 					    <el-menu-item index="4" @click="window.location.href='./user.html'">用户管理</el-menu-item>
 					    <el-menu-item index="5" @click="logout">退出</el-menu-item>

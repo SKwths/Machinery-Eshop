@@ -112,7 +112,7 @@
 			<header-full :bordered="true"></header-full>
 			<user-frame class="m-t-20">
 				<div class="app-title text-general-1 m-t-20 m-b-20">
-					商品信息
+					地址信息
 				</div>
 				<div class="app-addr text-4 text-general-1">
 					<div class="app-addr-item" v-if="addr_selected">
@@ -120,7 +120,7 @@
 						<div>{{addr_selected.province}} {{addr_selected.city}} {{addr_selected.district}}</div>
 						<div>{{addr_selected.addr}}; {{addr_selected.mobile}}</div>
 						<div class="text-important-very pointer">编辑</div>
-						<div class="app-addr-default" v-if="addr_selected.deFault === 1">默认地址</div>
+						<div class="app-addr-default" v-if="addr_selected.default_addr === 1">默认地址</div>
 					</div>
 					<div class="app-addr-change pointer text-4"  @click="open_select_addr">更换地址</div>
 				</div>
@@ -137,7 +137,7 @@
 								<div>{{item.province}} {{item.city}} {{item.district}}</div>
 								<div>{{item.addr}}; {{item.mobile}}</div>
 								<div class="text-important-very pointer" @click="select_addr(item)">选择</div>
-								<div class="app-addr-default" v-if="item.deFault === 1">默认地址</div>
+								<div class="app-addr-default" v-if="item.defaultAddr === 1">默认地址</div>
 							</div>
 						</div>
 					</div>
@@ -196,8 +196,9 @@
 		        	axios.post("/addr/findaddrs.do").then(response=>{
 						if(response.data.status === 0){
 							this.addrs = response.data.data;
+							console.log(this.addrs)
 							for(let addr of this.addrs){
-								if(addr.deFault === 1){
+								if(addr.defaultAddr === 1){
 									this.addr_selected = addr;
 								}
 							}

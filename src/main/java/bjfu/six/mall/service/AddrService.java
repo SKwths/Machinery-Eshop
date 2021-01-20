@@ -20,9 +20,9 @@ public class AddrService {
         address.setDistrict(district);
         address.setAddr(addr);
         address.setZip(zip);
-        address.setUser_Id(user_id);
-        address.setDel_state(0);
-        address.setDefault_addr(0);
+        address.setUserId(user_id);
+        address.setDelState(0);
+        address.setDefaultAddr(0);
         if(addressMapper.insertAddr(address)== 0) {
             throw new RuntimeException("增加地址失败");
         }

@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Address {
     private int id;
-    private int user_Id;
+    private int userId;
     private String name;
     private String phone;
     private String mobile;
@@ -18,8 +18,8 @@ public class Address {
     private String district;
     private String addr;
     private String zip;
-    private int default_addr; //default
-    private int del_state;
+    private int defaultAddr;
+    private int delState;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date created;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
@@ -34,13 +34,6 @@ public class Address {
         this.id = id;
     }
 
-    public int getUser_Id() {
-        return user_Id;
-    }
-
-    public void setUser_Id(int user_Id) {
-        this.user_Id = user_Id;
-    }
 
     public String getName() {
         return name;
@@ -106,20 +99,28 @@ public class Address {
         this.zip = zip;
     }
 
-    public int getDefault_addr() {
-        return default_addr;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setDefault_addr(int default_addr) {
-        this.default_addr = default_addr;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getDel_state() {
-        return del_state;
+    public int getDefaultAddr() {
+        return defaultAddr;
     }
 
-    public void setDel_state(int del_state) {
-        this.del_state = del_state;
+    public void setDefaultAddr(int defaultAddr) {
+        this.defaultAddr = defaultAddr;
+    }
+
+    public int getDelState() {
+        return delState;
+    }
+
+    public void setDelState(int delState) {
+        this.delState = delState;
     }
 
     public Date getCreated() {

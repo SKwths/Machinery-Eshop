@@ -26,13 +26,13 @@
 </head>
 <body>
 <div id="app">
-	<admin-frame  active="2" title="类型参数管理">
+	<admin-frame  active="2" title="商品类别管理">
 		<min-width-container>
 		    <div class="m-t-8 m-b-8">
-		        <div class="app-title text-2 text-important">类型参数列表</div>
+		        <div class="app-title text-2 text-important">商品类别列表</div>
 		    </div>
 		    <div class="type-add">
-		        <el-button type="primary" size="mini" @click="open_dialog_new">新增类型参数</el-button>
+		        <el-button type="primary" size="mini" @click="open_dialog_new">新增商品类别</el-button>
 		    </div>
 		    <div>
 		        <template>
@@ -66,7 +66,7 @@
 		
 		</min-width-container>
 	</admin-frame>
-	<el-dialog title="类型参数" :visible.sync="dialogFormVisible">
+	<el-dialog title="类型" :visible.sync="dialogFormVisible">
 		<el-form :model="dialogFormItem">
 			<el-form-item label="名称" :label-width="formLabelWidth">
 				<el-input v-model="dialogFormItem.name" autocomplete="off"></el-input>

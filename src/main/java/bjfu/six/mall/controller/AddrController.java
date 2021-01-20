@@ -97,6 +97,8 @@ public class AddrController {
             int setid = Integer.valueOf(id).intValue();
             Response rs = new Response();
             Address address = addrService.findAddressById(setid);
+            System.out.println(address.getId());
+            System.out.println(address.getDefaultAddr());
             rs.setData(address);
             return rs;
         }

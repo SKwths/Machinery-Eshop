@@ -22,7 +22,7 @@ public interface AddressMapper {
     @Update("update action_address set del_state = 1 where id = #{delid}")
     int delAddr(int delid);
 
-    @Insert({"insert into action_address(user_id, name, mobile, province, city, district, addr, zip) values(#{user_Id}, #{name}, #{mobile},#{province},#{city},#{district},#{addr},#{zip})"})
+    @Insert({"insert into action_address(user_id, name, mobile, province, city, district, addr, zip) values(#{userId}, #{name}, #{mobile},#{province},#{city},#{district},#{addr},#{zip})"})
     @SelectKey(before = false,keyColumn = "id",keyProperty = "id",
             statement = "select last_insert_id()",resultType = Integer.class)
     int insertAddr(Address addr);
